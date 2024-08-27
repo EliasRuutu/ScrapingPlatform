@@ -3,7 +3,9 @@ import React from "react";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 const Page: React.FC = () => {
+  const navigator = useRouter();
   return (
     <div className="page bg-[url('/assets/login/back.png')] w-[100vw] h-[100vh] bg-no-repeat">
       <div className=" w-full flex-wrap flex flex-row justify-end h-full">
@@ -33,7 +35,7 @@ const Page: React.FC = () => {
             </Link>
           </div>
           <div className="pt-5">
-            <Button onClick={()=>{}} variant="fill"  color="#5B56EF">
+            <Button onClick={()=>{navigator.push("/opportunities/allOpportunities/")}} variant="fill"  color="#5B56EF">
               Login
             </Button>
           </div>

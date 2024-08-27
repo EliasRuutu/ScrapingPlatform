@@ -4,14 +4,20 @@
 "use client";
 import Image from "next/image";
 import Button from "../components/Button";
-import Step1 from "./step_1";
 import Step2 from "./step_2";
+import Step1 from "./step_1";
+import Step3 from "./step_3";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 const Page: React.FC = () => {
+  const navigator = useRouter();
   const [step, setStep] = useState<number>(0);
   const handleNextStep = () => {
-    setStep((step) => step + 1);
+    if(step < 2){
+      setStep((step) => step + 1);
+    }
+    else navigator.push("/login");
   };
   const handleBackStep = () => {
     setStep((step) => step - 1);
@@ -28,7 +34,7 @@ const Page: React.FC = () => {
             </div>
           </div>
           <div className="flex w-full flex-col gap-10 pt-5">
-            {step === 0 ? <Step1 /> : step === 1 ? <Step2 /> : ""}
+            {step === 0 ? <Step1 /> : step === 1 ? <Step2 /> : <Step3/>}
           </div>
           <div className="flex flex-row gap-5 justify-center p-5">
             {[0, 1, 2].map((v) => {
@@ -61,7 +67,7 @@ const Page: React.FC = () => {
             )}
             <Button variant="fill" color="#5B56EF" onClick={handleNextStep}>
               <div className="flex flex-row gap-5 justify-center">
-                <div>Next</div>
+                <div>{step !== 2 ? "Next" : "Join"}</div>
                 <Image
                   src={"/assets/icons/arrow-small-right.svg"}
                   width={"16"}

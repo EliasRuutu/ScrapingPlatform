@@ -3,11 +3,12 @@ interface InputPropsType {
   type?: "text" | "password";
   image?: string;
   placeholder?: string;
-  className?:string
+  className?:string,
+  width?:string;
 }
-const Input: React.FC<InputPropsType> = ({ type, image, placeholder, className }) => {
+const Input: React.FC<InputPropsType> = ({ type, image, placeholder, width="w-full", className }) => {
   return (
-    <div className="w-[inherit] relative">
+    <div className={`${width} relative`}>
       <input
         type={type}
         placeholder={placeholder}

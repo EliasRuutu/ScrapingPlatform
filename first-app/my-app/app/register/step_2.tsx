@@ -3,41 +3,20 @@ const Step2: React.FC = () => {
   return (
     <>
       <div className="flex flex-col gap-5">
-        <Input type="text" placeholder="Enter your e-mail" image="gender.svg" />
+        <Input type="text" placeholder="Card number" image="credit-card.svg" />
+        <Input type="text" placeholder="Expire date" image="calendar-day.svg" />
         <Input
           type="text"
-          placeholder="Enter your password"
-          image="human_race.svg"
-        />
-        <Input type="text" placeholder="Enter your password" image="user.svg" />
-        <Input type="text" placeholder="Enter your password" image="date.svg" />
-        <Input
-          type="text"
-          placeholder="Enter your password"
-          image="house-building.svg"
+          placeholder="Security code"
+          image="Frame.svg"
         />
       </div>
       <div className="flex flex-col gap-5">
-        <Input type="text" placeholder="Enter your e-mail" image="at1.svg" />
+        <Input type="text" placeholder="Select your country" image="world.svg" />
         <Input
           type="text"
-          placeholder="Enter your password"
-          image="marker.svg"
-        />
-        <Input
-          type="text"
-          placeholder="Enter your password"
-          image="instagram.svg"
-        />
-        <Input
-          type="text"
-          placeholder="Enter your password"
-          image="phone-flip.svg"
-        />
-        <Input
-          type="password"
-          placeholder="Enter your password"
-          image="user-key.svg"
+          placeholder="Zip Code"
+          image="newsletter-subscribe.svg"
         />
       </div>
     </>
