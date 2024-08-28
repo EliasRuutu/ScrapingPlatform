@@ -1,6 +1,6 @@
 "use client";
 import Layout from "@/app/components/Layout";
-// import Image from "next/image";
+import Image from "next/image";
 import Button from "@/app/components/Button";
 import FileItem from "@/app/components/opportunities/FileItem";
 import Contacts from "@/app/components/opportunities/Contacts";
@@ -8,7 +8,6 @@ import facebook from "@/public/assets/icons/facebook.svg"
 import twitter from "@/public/assets/icons/twitter.svg"
 import medium from "@/public/assets/icons/medium.svg"
 import linkedin from "@/public/assets/icons/linkedin.svg"
-import Image from 'next/image';
 const Page: React.FC = () => {
   return (
     <>
@@ -16,7 +15,7 @@ const Page: React.FC = () => {
         <div className="flex flex-col gap-[105px]">
           <div className=" rounded-xl w-full h-[200px] overflow-hidden">
             <Image
-              src={"/assets/oppportunities/cover.webp"}
+              src={"/assets/opportunities/cover.webp"}
               width={400}
               height={400}
               className=" w-full"
@@ -60,7 +59,7 @@ const Page: React.FC = () => {
               <div className="rounded-lg border-[#5B56EF] border-[1px] py-[30px] flex flex-col gap-5">
                 <div className="flex flex-row justify-center">
                   <Image
-                    src={"/assets/oppportunities/cover.webp"}
+                    src={"/assets/opportunities/cover.webp"}
                     width={100}
                     height={100}
                     className=" w-[263px] h-[263px]  rounded-lg"

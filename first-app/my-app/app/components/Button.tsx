@@ -15,7 +15,7 @@ const Button: React.FC<ButtonPropsType> = ({ variant, color, children, className
       : `border-[${color}] border-[1px] text-[${color}]`;
   return (
     <div className={`${width}`}>
-      <button onClick={(e)=>onClick(e)} className={`${baseClasses} ${variantClasses}`}>{children}</button>
+      <button onClick={(e)=>onClick(e)} className={`${baseClasses} ${variantClasses} hover:shadow-lg transition-all`}>{children}</button>
     </div>
   );
 };

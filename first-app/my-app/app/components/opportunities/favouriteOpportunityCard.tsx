@@ -20,7 +20,7 @@ const FavouriteOpportunityCard: React.FC<FavouriteOpportunityPropsType> = ({
   onClick
 }) => {
   return <>
-  <div className=" rounded-lg flex flex-row flex-wrap justify-between gap-5" onClick={onClick}>
+  <div className="rounded-lg flex flex-row flex-wrap justify-between gap-5 p-4 border-[1px] transition-all border-[#45454520] hover:shadow-md hover:scale-[1.01]" onClick={onClick}>
     <Image src={pic} width={"100"} height={"100"} alt=""/>
     <div className=" flex flex-col flex-wrap justify-between">
         <div className=" flex flex-row flex-wrap items-center justify-between text-[#5B56EF] text-[16px]">

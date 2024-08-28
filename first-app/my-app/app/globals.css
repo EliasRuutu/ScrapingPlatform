@@ -16,7 +16,7 @@
   }
 }
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 6px;
   /* width of the entire scrollbar */
 }
 
@@ -36,6 +36,15 @@
 body {
   color: rgb(var(--foreground-rgb));
   font-size: 12px;
+}
+select {
+  -webkit-appearance: none; /* For Safari */
+  -moz-appearance: none;    /* For Firefox */
+  appearance: none;         /* For modern browsers */
+  border: 1px solid #ccc;  /* Optional: Add border */
+  padding: 10px;           /* Optional: Add padding */
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA...') no-repeat right; /* Custom image */
+  background-size: 10px;   /* Size of the background image */
 }
 .pagination {
   display: flex;

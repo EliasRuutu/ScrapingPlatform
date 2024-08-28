@@ -22,7 +22,7 @@ const OpportunityCard: React.FC<OpportunityPropsType> = ({
   onClick
 }) => {
   return <>
-  <div className=" rounded-lg flex flex-row flex-wrap justify-between gap-5" onClick={onClick}>
+  <div className=" rounded-lg flex flex-row flex-wrap justify-between gap-5 p-4 border-[1px] transition-all border-[#45454520] hover:shadow-md hover:scale-[1.01]" onClick={onClick}>
     <Image src={pic} width={"100"} height={"100"} alt=""/>
     <div className=" flex flex-col flex-wrap justify-between">
         <div className=" flex flex-row flex-wrap items-center justify-between text-[#5B56EF] text-[16px]">
@@ -43,7 +43,7 @@ const OpportunityCard: React.FC<OpportunityPropsType> = ({
             <div className=" rounded-full px-2 bg-[#E8E8FE] text-[#5B56EF]">
                 Open until <span className="text-[16px]">20 : 00, Tomorrow</span>
             </div>
-            <Image src={!isFavoriate ? BlackHeart : RedHeart} alt=""/>
+            <Image src={!isFavoriate ? BlackHeart : RedHeart} className="animate-pulse hover:animate-none cursor-pointer" alt=""/>
         </div>
     </div>
   </div>

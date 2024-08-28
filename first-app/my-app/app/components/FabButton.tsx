@@ -4,15 +4,17 @@ interface FabButtonPropsType {
   icon: string | StaticImageData;
   width?: number; //Pixel
   height?: number;
+  onClick?: (e: React.MouseEvent) => void;
 }
 const FabButton: React.FC<FabButtonPropsType> = ({
   icon,
   width = 20,
   height = 20,
+  onClick
 }) => {
   return (
     <>
-      <button>
+      <button onClick={onClick}>
         <Image
           src={icon}
           alt=""

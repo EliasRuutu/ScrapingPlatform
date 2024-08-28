@@ -33,7 +33,7 @@ const Header: React.FC<HeaderPropsType> = ({ links }) => {
                 return (
                   <>
                     <Link href={`${v.path}`} prefetch={true}>
-                      <div className="py-2 px-8 text-[16px] transition-all text-black hover:shadow-[0px_3px_5px_3px_#5B5FEF]">{v.label}</div>
+                      <div className="py-2 hover:border-b-[1px] hover:scale-[1.1] hover:font-bold px-8 text-[16px] transition-all text-black  ">{v.label}</div>
                     </Link>
                   </>
                 );

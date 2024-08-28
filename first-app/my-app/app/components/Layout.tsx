@@ -17,7 +17,7 @@ const Layout: React.FC<LayoutPropsType> = ({
             items={[
               {lable:"All opportunities", url:"/opportunities/allOpportunities/"},
               {lable:"Opportunities of interest", url:"/opportunities/favouriteOpportunities"},
-              {lable:"My opportunities", url:""},
+              {lable:"My opportunities", url:"/opportunities/myOpportunities"},
             ]}
           />
         )}

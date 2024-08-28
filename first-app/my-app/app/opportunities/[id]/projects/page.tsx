@@ -9,7 +9,11 @@ import visibleIcon from "@/public/assets/icons/visible.svg";
 import editIcon from "@/public/assets/icons/edit.svg";
 import nextIcon from "@/public/assets/icons/next.svg"
 import previousIcon from "@/public/assets/icons/previous.svg"
+import { usePathname, useRouter } from "next/navigation";
+import Input from "@/app/components/Input";
+import Button from "@/app/components/Button";
 const Page: React.FC = () => {
+  const navigator = useRouter();
   const itemsPerPage = 5;
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + itemsPerPage;
@@ -19,9 +23,19 @@ const Page: React.FC = () => {
   const handlePageClick = (event: { selected: number }) => {
     const newOffset = (event.selected * itemsPerPage) % items.length;
     setItemOffset(newOffset);
-};
+  };
+  const path = usePathname();
+  const handleRouter = (id: string)=>{
+    navigator.push(path+"/"+id);
+  }
   return (
     <Layout>
+      <div className="flex flex-row justify-between mt-10 ">
+        <Input image="search.svg" width="w-[500px]" placeholder="Enter your project name"/>
+        <Button variant="fill" color="#5B56EF" onClick={()=>{
+          navigator.push("/opportunities/asdfasdf/add")
+        }} width="w-[200px]">+ Add</Button>
+      </div>
       <div className=" flex flex-col mt-5">
         <div className="flex flex-col">
           {currentItems.map((item, index) => {
@@ -43,9 +57,9 @@ const Page: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex flex-row gap-5 justify-end">
-                  <FabButton icon={editIcon} />
+                  <FabButton onClick={(e)=>{navigator.push("/opportunities/asdfasdf/edit")}} icon={editIcon} />
                   <FabButton icon={deleteIcon} />
-                  <FabButton icon={visibleIcon} />
+                  <FabButton onClick={(e)=>{handleRouter("232323")}} icon={visibleIcon}/>
                 </div>
               </div>
             );
