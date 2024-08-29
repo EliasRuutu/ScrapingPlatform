@@ -26,12 +26,12 @@ const Page: React.FC = () => {
   };
   const navigator = useRouter();
   return (
-    <Layout>
+    <div>
       <EditModal isShow={isEditModal} closeModal={closeEditModal}/>
       <AddModal isShow={isAddModal} closeModal={closeAddModal}/>
       <div
         id="app"
-        className=" mt-10 flex flex-row items-center justify-between"
+        className=" flex flex-row items-center justify-between"
       >
         <div className="flex flex-row items-center gap-5">
           <div className="w-[400px]">
@@ -80,7 +80,7 @@ const Page: React.FC = () => {
           );
         })}
       </div>
-    </Layout>
+    </div>
   );
 };
 export default Page;

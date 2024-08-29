@@ -13,13 +13,13 @@ const Account = dynamic(()=>{
 }, {ssr:false})
 const Header: React.FC<HeaderPropsType> = ({ links }) => {
   const navigator = useRouter();
-    const handleSearchClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleSearchClick = () => {
         // Handle search button click
         console.log("Search button clicked");
     };
   return (
     <>
-      <div className="flex flex-row flex-wrap py-5 gap-8">
+      <div className="flex flex-row flex-wrap py-5 gap-8 sticky top-0 backdrop-blur-md rounded-full px-5">
         <div className="flex-[3] flex flex-row justify-between flex-wrap">
           <Image
             src={"/assets/global/logo.svg"}

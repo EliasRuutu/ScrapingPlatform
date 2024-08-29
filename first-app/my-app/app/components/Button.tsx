@@ -5,7 +5,7 @@ interface ButtonPropsType {
   width?:string;
   children: string|React.ReactNode|null;
   className?: string,
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void; // Define the onClick prop
+  onClick: () => void; // Define the onClick prop
 }
 const Button: React.FC<ButtonPropsType> = ({ variant, color, children, className, width="w-full", onClick }) => {
   const baseClasses: string = `w-full rounded-full p-[11px] outline-none text-[12px] ${className}`;
@@ -15,7 +15,7 @@ const Button: React.FC<ButtonPropsType> = ({ variant, color, children, className
       : `border-[${color}] border-[1px] text-[${color}]`;
   return (
     <div className={`${width}`}>
-      <button onClick={(e)=>onClick(e)} className={`${baseClasses} ${variantClasses} hover:shadow-lg transition-all`}>{children}</button>
+      <button onClick={onClick} className={`${baseClasses} ${variantClasses} hover:shadow-lg transition-all`}>{children}</button>
     </div>
   );
 };

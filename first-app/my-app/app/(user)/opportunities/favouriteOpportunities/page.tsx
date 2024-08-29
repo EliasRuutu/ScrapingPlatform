@@ -7,8 +7,8 @@ const Page: React.FC = () => {
     const now = Date.now().toLocaleString();
     const navigator = useRouter();
   return (
-    <Layout>
-      <div className="mt-10 w-[300px]">
+    <div>
+      <div className="w-[300px]">
         <Input image="search.svg"/>
       </div>
       <div className="max-h-[600px] flex flex-row mt-5 flex-wrap gap-5 py-5 pl-5 border-l-[#5B56EF] border-l-[5px] overflow-y-auto border-[1px]">
@@ -30,7 +30,7 @@ const Page: React.FC = () => {
           );
         })}
       </div>
-    </Layout>
+    </div>
   );
 };
 export default Page;

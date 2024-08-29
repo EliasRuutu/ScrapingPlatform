@@ -2,9 +2,10 @@
 import { usePathname, useRouter } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";
 interface TabMenuPropsType {
+  classNames?:string;
   items: Array<{ lable: string; url: string }>;
 }
-const TabMenu: React.FC<TabMenuPropsType> = ({ items }) => {
+const TabMenu: React.FC<TabMenuPropsType> = ({ items, classNames }) => {
   const path = usePathname();
   const getSelect = (path:string) : number => {
     if(path.includes("favouriteOpportunities")){
@@ -33,7 +34,7 @@ const TabMenu: React.FC<TabMenuPropsType> = ({ items }) => {
   }, [path]);
   return (
     <>
-      <div className="flex flex-row flex-wrap border-b-[1px] w-fit border-b-[#D9D9D9]">
+      <div className={`flex flex-row flex-wrap border-b-[1px] w-fit border-b-[#D9D9D9] ${classNames}`}>
         {items &&
           items.map((item, index) => {
             return (

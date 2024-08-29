@@ -29,8 +29,8 @@ const Page: React.FC = () => {
     navigator.push(path+"/"+id);
   }
   return (
-    <Layout>
-      <div className="flex flex-row justify-between mt-10 ">
+    <>
+      <div className="flex flex-row justify-between ">
         <Input image="search.svg" width="w-[500px]" placeholder="Enter your project name"/>
         <Button variant="fill" color="#5B56EF" onClick={()=>{
           navigator.push("/opportunities/asdfasdf/add")
@@ -88,7 +88,7 @@ const Page: React.FC = () => {
             />
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 export default Page;
