@@ -4,10 +4,12 @@ import { useForm, Controller } from "react-hook-form";
 import Input from "@/app/components/Input";
 import Button from "@/app/components/Button";
 import Select from "@/app/components/Select";
+import { useRef } from "react";
+import { Add } from "@/actions/opportunity";
 Modal.setAppElement("#app");
 interface AddModalPropsType {
   isShow: boolean;
-  closeModal:()=>void
+  closeModal: () => void;
 }
 ///
 interface OpportunityAddFormType {
@@ -29,8 +31,10 @@ const customStyles = {
 };
 const AddModal: React.FC<AddModalPropsType> = ({ isShow, closeModal }) => {
   const { handleSubmit, control } = useForm<OpportunityAddFormType>();
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const formref = useRef(null);
+  const onSubmit = async (data: any) => {
+    const result = await Add(data);
+    console.log(result);
   };
   return (
     <>
@@ -41,16 +45,18 @@ const AddModal: React.FC<AddModalPropsType> = ({ isShow, closeModal }) => {
             &times;
           </button>
         </div>
-        <div>
+        <div className="flex flex-col gap-5">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col gap-5"
+            ref={formref}
           >
             <div className="flex flex-col gap-2">
               <div>Opportunity:</div>
               <Controller
                 name="name"
                 control={control}
+                rules={{ required: true }}
                 defaultValue=""
                 render={({
                   field: { onChange, value },
@@ -75,6 +81,7 @@ const AddModal: React.FC<AddModalPropsType> = ({ isShow, closeModal }) => {
                 name="type"
                 control={control}
                 defaultValue=""
+                rules={{ required: true }}
                 render={({
                   field: { onChange, value },
                   formState,
@@ -98,6 +105,7 @@ const AddModal: React.FC<AddModalPropsType> = ({ isShow, closeModal }) => {
                 name="amount"
                 control={control}
                 defaultValue=""
+                rules={{ required: true }}
                 render={({
                   field: { onChange, value },
                   formState,
@@ -111,6 +119,7 @@ const AddModal: React.FC<AddModalPropsType> = ({ isShow, closeModal }) => {
                 <Controller
                   name="from"
                   control={control}
+                  rules={{ required: true }}
                   defaultValue=""
                   render={({
                     field: { onChange, value },
@@ -148,19 +157,23 @@ const AddModal: React.FC<AddModalPropsType> = ({ isShow, closeModal }) => {
               </div>
             </div>
             {/* <Input {...register("type", { required: true })} /> */}
-            <div className="flex flex-row justify-between gap-5">
-              <Button
-                variant="outline"
-                onClick={closeModal}
-                color="#5B56EF"
-              >
-                Cancel
-              </Button>
-              <Button variant="fill" onClick={closeModal} color="#5B56EF">
-                Save
-              </Button>
-            </div>
           </form>
+          <div className="flex flex-row justify-between gap-5">
+            <Button variant="outline" onClick={closeModal} color="#5B56EF">
+              Cancel
+            </Button>
+            <Button
+              variant="fill"
+              onClick={() => {
+                (formref.current as unknown as HTMLFormElement).dispatchEvent(
+                  new Event("submit", { cancelable: true, bubbles: true })
+                );
+              }}
+              color="#5B56EF"
+            >
+              Save
+            </Button>
+          </div>
         </div>
         <div></div>
       </Modal>

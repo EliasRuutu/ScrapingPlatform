@@ -1,7 +1,9 @@
 "use client";
 import Layout from "@/app/components/Layout";
 import MyOpportunityCard from "@/app/components/opportunities/MyOpportunityCard";
-import EditModal from "@/app/components/opportunities/EditModal";
+import EditModal, {
+  OpportunityAddFormType,
+} from "@/app/components/opportunities/EditModal";
 import AddModal from "@/app/components/opportunities/AddModal";
 import Input from "@/app/components/Input";
 import Button from "@/app/components/Button";
@@ -24,15 +26,24 @@ const Page: React.FC = () => {
   const openAddModal = () => {
     setIsAddModal(true);
   };
+  const [selectedOpportunity, setSelectedOpportunity] =
+    useState<OpportunityAddFormType>({
+      name: "",
+      type: "",
+      from: "",
+      to: "",
+      amount: 0,
+    });
   const navigator = useRouter();
   return (
     <div>
-      <EditModal isShow={isEditModal} closeModal={closeEditModal}/>
-      <AddModal isShow={isAddModal} closeModal={closeAddModal}/>
-      <div
-        id="app"
-        className=" flex flex-row items-center justify-between"
-      >
+      <EditModal
+        isShow={isEditModal}
+        data={selectedOpportunity}
+        closeModal={closeEditModal}
+      />
+      <AddModal isShow={isAddModal} closeModal={closeAddModal} />
+      <div id="app" className=" flex flex-row items-center justify-between">
         <div className="flex flex-row items-center gap-5">
           <div className="w-[400px]">
             <Input
@@ -62,13 +73,13 @@ const Page: React.FC = () => {
           1,
         ].map((item, index) => {
           return (
-            <>
+            <div key={index}>
               <MyOpportunityCard
                 onClick={(e) => {
                   navigator.push("/opportunities/asdfasdf/projects");
                 }}
                 onClickEdit={openEditModal}
-                onClickDelete={()=>{}}
+                onClickDelete={() => {}}
                 amount={300}
                 name="XXXXXX"
                 pic={"/assets/opportunities/default.png"}
@@ -76,7 +87,7 @@ const Page: React.FC = () => {
                 from={now}
                 to={now}
               />
-            </>
+            </div>
           );
         })}
       </div>

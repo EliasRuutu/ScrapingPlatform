@@ -4,16 +4,18 @@ import { useForm, Controller } from "react-hook-form";
 import Input from "@/app/components/Input";
 import Button from "@/app/components/Button";
 import Select from "@/app/components/Select";
+import moment from "moment";
 Modal.setAppElement("#app");
 interface EditModalPropsType {
   isShow: boolean;
-  closeModal:()=>void
+  data: OpportunityAddFormType;
+  closeModal: () => void;
 }
 ///
-interface OpportunityAddFormType {
+export interface OpportunityAddFormType {
   name: string;
   type: string;
-  amount: string;
+  amount: number;
   from: string;
   to: string;
 }
@@ -27,7 +29,11 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
   },
 };
-const EditModal: React.FC<EditModalPropsType> = ({ isShow, closeModal }) => {
+const EditModal: React.FC<EditModalPropsType> = ({
+  isShow,
+  data,
+  closeModal,
+}) => {
   const { handleSubmit, control } = useForm<OpportunityAddFormType>();
   const onSubmit = (data: any) => {
     console.log(data);
@@ -51,7 +57,7 @@ const EditModal: React.FC<EditModalPropsType> = ({ isShow, closeModal }) => {
               <Controller
                 name="name"
                 control={control}
-                defaultValue=""
+                defaultValue={data.name}
                 render={({
                   field: { onChange, value },
                   formState,
@@ -59,9 +65,10 @@ const EditModal: React.FC<EditModalPropsType> = ({ isShow, closeModal }) => {
                 }) => (
                   <Select
                     options={[
-                      { label: "AAAA", value: "123" },
-                      { label: "BBBB", value: "www" },
-                      { label: "CCC", value: "555" },
+                      { label: "AAAA", value: "AAAA" },
+                      { label: "BBBB", value: "BBBB" },
+                      { label: "CCC", value: "CCC" },
+                      { label: "SELECT", value: "" },
                     ]}
                     onChange={onChange}
                     value={value}
@@ -74,7 +81,7 @@ const EditModal: React.FC<EditModalPropsType> = ({ isShow, closeModal }) => {
               <Controller
                 name="type"
                 control={control}
-                defaultValue=""
+                defaultValue={data.type}
                 render={({
                   field: { onChange, value },
                   formState,
@@ -97,7 +104,7 @@ const EditModal: React.FC<EditModalPropsType> = ({ isShow, closeModal }) => {
               <Controller
                 name="amount"
                 control={control}
-                defaultValue=""
+                defaultValue={data.amount}
                 render={({
                   field: { onChange, value },
                   formState,
@@ -110,10 +117,10 @@ const EditModal: React.FC<EditModalPropsType> = ({ isShow, closeModal }) => {
                 <div>From:</div>
                 <Controller
                   name="from"
+                  defaultValue={moment(data.from).format("YYYY-MM-DD")}
                   control={control}
-                  defaultValue=""
                   render={({
-                    field: { onChange, value },
+                    field: { onChange, value,  },
                     formState,
                     fieldState,
                   }) => (
@@ -131,7 +138,7 @@ const EditModal: React.FC<EditModalPropsType> = ({ isShow, closeModal }) => {
                 <Controller
                   name="to"
                   control={control}
-                  defaultValue=""
+                  defaultValue={moment(data.from).format("YYYY-MM-DD")}
                   render={({
                     field: { onChange, value },
                     formState,
@@ -149,11 +156,7 @@ const EditModal: React.FC<EditModalPropsType> = ({ isShow, closeModal }) => {
             </div>
             {/* <Input {...register("type", { required: true })} /> */}
             <div className="flex flex-row justify-between gap-5">
-              <Button
-                variant="outline"
-                onClick={closeModal}
-                color="#5B56EF"
-              >
+              <Button variant="outline" onClick={closeModal} color="#5B56EF">
                 Cancel
               </Button>
               <Button variant="fill" onClick={closeModal} color="#5B56EF">

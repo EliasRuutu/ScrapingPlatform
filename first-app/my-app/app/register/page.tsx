@@ -8,22 +8,60 @@ import Step2 from "./step_2";
 import Step1 from "./step_1";
 import Step3 from "./step_3";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { UserDocument } from "@/models/User";
+const schema = yup
+  .object({
+    email: yup.string().email().required(),
+    password: yup.string().required(),
+    fullname: yup.string().required(),
+    phone: yup.string().required(),
+    birthday: yup.string().required(),
+    country: yup.string().required(),
+    creditCard: yup.string().required(),
+    expireDate: yup.string().required(),
+    securityCode: yup.string().required(),
+    location: yup.string().required(),
+  })
+  .required();
 const Page: React.FC = () => {
   const navigator = useRouter();
   const [step, setStep] = useState<number>(0);
+  const formRef = useRef(null);
   const handleNextStep = () => {
-    if(step < 2){
+    if (step < 2) {
       setStep((step) => step + 1);
+    } else {
+      formRef.current?.click();
     }
-    else navigator.push("/login");
   };
   const handleBackStep = () => {
     setStep((step) => step - 1);
   };
+  const onSubmit = (data: any) => {
+    console.log(data);
+    axios
+      .post("http://localhost:3000/api/register", data)
+      .then((res) => {
+        console.log(res.data);
+        navigator.push("/login");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
   return (
-    <div className="page bg-[url('/assets/register/back.png')] w-[100vw] h-[100vh] bg-no-repeat">
+    <div className="page bg-[url('/assets/register/back.png')] w-[100%] h-[100vh] bg-no-repeat">
       <div className=" w-full flex-wrap flex flex-row justify-end h-full">
         <div className="flex-[3]"></div>
         <div className="flex flex-[2] flex-col justify-between self-center px-[10vw] min-w-[400px]">
@@ -34,7 +72,16 @@ const Page: React.FC = () => {
             </div>
           </div>
           <div className="flex w-full flex-col gap-10 pt-5">
-            {step === 0 ? <Step1 /> : step === 1 ? <Step2 /> : <Step3/>}
+            <form onSubmit={handleSubmit(onSubmit)}>
+              {step === 0 ? (
+                <Step1 control={control} />
+              ) : step === 1 ? (
+                <Step2 control={control} />
+              ) : (
+                <Step3 />
+              )}
+              <input type="submit" hidden ref={formRef} />
+            </form>
           </div>
           <div className="flex flex-row gap-5 justify-center p-5">
             {[0, 1, 2].map((v) => {

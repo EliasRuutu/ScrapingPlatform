@@ -7,7 +7,7 @@ interface InputPropsType {
   className?:string,
   width?:string;
   onChange?:ChangeEventHandler
-  value?:string
+  value?:any
 }
 const Input: React.FC<InputPropsType> = ({ type, image, placeholder, width="w-full", className, onChange, value }) => {
   return (

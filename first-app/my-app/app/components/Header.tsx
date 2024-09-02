@@ -31,11 +31,11 @@ const Header: React.FC<HeaderPropsType> = ({ links }) => {
             {links &&
               links.map((v, index) => {
                 return (
-                  <>
+                  <div key={index}>
                     <Link href={`${v.path}`} prefetch={true}>
                       <div className="py-2 hover:border-b-[1px] hover:scale-[1.1] hover:font-bold px-8 text-[16px] transition-all text-black  ">{v.label}</div>
                     </Link>
-                  </>
+                  </div>
                 );
               })}
           </div>
