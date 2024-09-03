@@ -1,8 +1,8 @@
 "use client";
-import Layout from "@/app/components/Layout";
+// import Layout from "@/app/components/Layout";
 import MyOpportunityCard from "@/app/components/opportunities/MyOpportunityCard";
 import EditModal, {
-  OpportunityAddFormType,
+  OpportunityEditFormType,
 } from "@/app/components/opportunities/EditModal";
 import AddModal from "@/app/components/opportunities/AddModal";
 import Input from "@/app/components/Input";
@@ -27,12 +27,13 @@ const Page: React.FC = () => {
     setIsAddModal(true);
   };
   const [selectedOpportunity, setSelectedOpportunity] =
-    useState<OpportunityAddFormType>({
+    useState<OpportunityEditFormType>({
       name: "",
       type: "",
       from: "",
       to: "",
       amount: 0,
+      _id:""
     });
   const navigator = useRouter();
   return (
@@ -83,7 +84,7 @@ const Page: React.FC = () => {
                 amount={300}
                 name="XXXXXX"
                 pic={"/assets/opportunities/default.png"}
-                discription="asdfasdfasdfasdfasdf"
+                description="asdfasdfasdfasdfasdf"
                 from={now}
                 to={now}
               />

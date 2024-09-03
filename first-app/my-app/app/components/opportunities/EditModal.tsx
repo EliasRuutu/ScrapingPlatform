@@ -5,19 +5,22 @@ import Input from "@/app/components/Input";
 import Button from "@/app/components/Button";
 import Select from "@/app/components/Select";
 import moment from "moment";
+import { useRef } from "react";
+import { Update } from "@/actions/opportunity";
 Modal.setAppElement("#app");
 interface EditModalPropsType {
   isShow: boolean;
-  data: OpportunityAddFormType;
+  data: OpportunityEditFormType;
   closeModal: () => void;
 }
 ///
-export interface OpportunityAddFormType {
+export interface OpportunityEditFormType {
   name: string;
   type: string;
   amount: number;
   from: string;
   to: string;
+  _id:string
 }
 const customStyles = {
   content: {
@@ -34,9 +37,12 @@ const EditModal: React.FC<EditModalPropsType> = ({
   data,
   closeModal,
 }) => {
-  const { handleSubmit, control } = useForm<OpportunityAddFormType>();
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const { handleSubmit, control } = useForm<OpportunityEditFormType>();
+  const formRef = useRef(null);
+  const onSubmit = async (formData: any) => {
+    const result = await Update(data._id, formData);
+    console.log(result);
+    closeModal();
   };
   return (
     <>
@@ -51,6 +57,7 @@ const EditModal: React.FC<EditModalPropsType> = ({
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col gap-5"
+            ref={formRef}
           >
             <div className="flex flex-col gap-2">
               <div>Opportunity:</div>
@@ -120,7 +127,7 @@ const EditModal: React.FC<EditModalPropsType> = ({
                   defaultValue={moment(data.from).format("YYYY-MM-DD")}
                   control={control}
                   render={({
-                    field: { onChange, value,  },
+                    field: { onChange, value },
                     formState,
                     fieldState,
                   }) => (
@@ -138,7 +145,7 @@ const EditModal: React.FC<EditModalPropsType> = ({
                 <Controller
                   name="to"
                   control={control}
-                  defaultValue={moment(data.from).format("YYYY-MM-DD")}
+                  defaultValue={moment(data.to).format("YYYY-MM-DD")}
                   render={({
                     field: { onChange, value },
                     formState,
@@ -159,7 +166,15 @@ const EditModal: React.FC<EditModalPropsType> = ({
               <Button variant="outline" onClick={closeModal} color="#5B56EF">
                 Cancel
               </Button>
-              <Button variant="fill" onClick={closeModal} color="#5B56EF">
+              <Button
+                variant="fill"
+                onClick={() => {
+                  (formRef.current as unknown as HTMLFormElement).dispatchEvent(
+                    new Event("submit")
+                  );
+                }}
+                color="#5B56EF"
+              >
                 Save
               </Button>
             </div>

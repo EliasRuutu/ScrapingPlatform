@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { GetAll } from "@/actions/opportunity";
 import { ObjectId } from "mongoose";
 import EditModal, {
-  OpportunityAddFormType,
+  OpportunityEditFormType,
 } from "@/app/components/opportunities/EditModal";
 import AddModal from "@/app/components/opportunities/AddModal";
 const DataTable = dynamic(() => import("react-data-table-component"), {
@@ -69,12 +69,13 @@ const Page: React.FC = () => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [isEditModal, setIsEditModal] = useState<boolean>(false);
   const [isAddModal, setIsAddModal] = useState<boolean>(false);
-  const [selectedRow, setSelectedRow] = useState<OpportunityAddFormType>({
+  const [selectedRow, setSelectedRow] = useState<OpportunityEditFormType>({
     name: "",
     type: "",
     from: "",
     to:"",
     amount: 0,
+    _id:""
   });
   useEffect(() => {
     const fetchData = async () => {
@@ -113,7 +114,7 @@ const Page: React.FC = () => {
         selectableRows
         selectableRowsSingle
         onSelectedRowsChange={(e) => {
-          setSelectedRow(e.selectedRows[0] as OpportunityAddFormType);
+          setSelectedRow(e.selectedRows[0] as OpportunityEditFormType);
           setIsEdit(e.selectedCount === 1);
         }}
         // actions={<button>Add</button>}

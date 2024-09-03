@@ -1,5 +1,4 @@
 import mongoose, { ObjectId, Schema, model } from "mongoose";
-import { number, string } from "yup";
 interface OpportunityDocument {
   _id: string;
   name: string;

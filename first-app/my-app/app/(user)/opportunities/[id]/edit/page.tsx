@@ -51,7 +51,7 @@ const Page: React.FC = () => {
           <div className="flex flex-row justify-between">
             <div className="flex-1 text-[16px] text-[#5B56EF]">Files:</div>
             <div className="flex-[5] flex flex-col gap-5">
-              <UploadDiv />
+              <UploadDiv onClick={()=>{}} />
               <div className="flex flex-col gap-3">
                 {[1, 2, 3, 4, 5].map((item, index) => {
                   return (

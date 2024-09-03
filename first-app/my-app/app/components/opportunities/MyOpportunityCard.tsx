@@ -3,7 +3,7 @@ import Dropdown from "../Dropdown";
 interface MyOpportunityPropsType {
   pic: string | StaticImageData;
   amount: number;
-  discription: string;
+  description: string;
   name: string;
   from: string;
   to: string;
@@ -17,7 +17,7 @@ const MyOpportunityCard: React.FC<MyOpportunityPropsType> = ({
   from = Date.now,
   to,
   pic,
-  discription,
+  description,
   onClick,
   onClickDelete,
   onClickEdit
@@ -46,7 +46,7 @@ const MyOpportunityCard: React.FC<MyOpportunityPropsType> = ({
             <div className="text-right">{amount} USD</div>
           </div>
           <div className="text-[12px] text-[#777D87]">{name}</div>
-          <div className=" text-[#454545]">{discription}</div>
+          <div className=" text-[#454545]">{description}</div>
           <div className=" flex flex-row flex-wrap  gap-3 items-center">
             <div className=" rounded-full px-2 bg-[#E8E8FE] text-[#5B56EF]">
               Open until <span className="text-[16px]">20 : 00, Tomorrow</span>

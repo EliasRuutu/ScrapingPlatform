@@ -3,7 +3,7 @@ const useOutsideClick = (callback: any) => {
   const ref = useRef<HTMLElement>(null);
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target)) {
+      if (ref.current && !(ref.current as unknown as HTMLElement).contains(event.target)) {
         callback();
       }
     };

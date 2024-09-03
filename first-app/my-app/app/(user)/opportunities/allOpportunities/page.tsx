@@ -24,7 +24,7 @@ const Page: React.FC = () => {
                 amount={300}
                 name="XXXXXX"
                 pic={"/assets/opportunities/default.png"}
-                discription="asdfasdfasdfasdfasdf"
+                description="asdfasdfasdfasdfasdf"
                 isFavoriate={false}
                 from={now}
                 to={now}

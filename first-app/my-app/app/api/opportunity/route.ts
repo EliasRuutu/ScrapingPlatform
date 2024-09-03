@@ -1,4 +1,4 @@
-import { NextApiRequest } from "next";
+
 import { NextRequest, NextResponse } from "next/server";
 import Opportunity from "@/models/Opportunity";
 import { connectDB } from "@/lib/mongodb";
@@ -10,11 +10,11 @@ interface User {
   name: string;
   email: string;
 }
-export const GET = async (req: NextApiRequest) => {
+export const GET = async () => {
   await connectDB();
-  if (req.query?.id) {
-    // const opportunity =
-  }
+  // if (req.query?.id) {
+  //   // const opportunity =
+  // }
   //return //All users
   const opportunities = await Opportunity.find();
   return NextResponse.json(opportunities);

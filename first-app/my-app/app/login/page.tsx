@@ -14,13 +14,13 @@ const Page: React.FC = () => {
     const res = await signIn("credentials", {
       email: data.email,
       password: data.password,
-      redirect:false
+      redirect: false,
     });
-    if(res?.error){
-      console.log("sdfsdf")
+    if (res?.error) {
+      console.log("sdfsdf");
     }
-    if(res?.ok){
-      return  navigator.push("/");
+    if (res?.ok) {
+      return navigator.push("/");
     }
     // navigator.push("/register/step_2");
   };
@@ -88,13 +88,19 @@ const Page: React.FC = () => {
             />
           </div>
           <div className="pt-5">
-            <Link href={"#"} className=" text-[#5B56EF] underline">
+            {/* <Link href={"#"} className=" text-[#5B56EF] underline">
               Forget password
+            </Link> */}
+            If you don’t have an account,
+            <Link href={"/register"} prefetch className=" text-[#5B56EF] underline">
+              Sign up
             </Link>
           </div>
           <div className="pt-5">
             <Button
-              onClick={() => formref?.current?.dispatchEvent?.(new Event("submit"))}
+              onClick={() =>
+                (formref?.current as unknown as HTMLElement).dispatchEvent?.(new Event("submit"))
+              }
               variant="fill"
               color="#5B56EF"
             >

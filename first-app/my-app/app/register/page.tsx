@@ -8,6 +8,8 @@ import Step2 from "./step_2";
 import Step1 from "./step_1";
 import Step3 from "./step_3";
 import Link from "next/link";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
@@ -37,12 +39,22 @@ const Page: React.FC = () => {
     if (step < 2) {
       setStep((step) => step + 1);
     } else {
-      formRef.current?.click();
+      (formRef.current as unknown as HTMLElement).click();
     }
   };
   const handleBackStep = () => {
     setStep((step) => step - 1);
   };
+  const onSubmitHandler = async (event:any) => {
+    event.preventDefault();
+    const isValid = await trigger();
+    if(isValid){
+      handleSubmit(onSubmit)();
+    }
+    else {
+      toast("Incorrect value! \n Please check input values", {type:"error"});
+    }
+  }
   const onSubmit = (data: any) => {
     console.log(data);
     axios
@@ -56,12 +68,14 @@ const Page: React.FC = () => {
       });
   };
   const {
+    trigger,
     handleSubmit,
     control,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
   return (
     <div className="page bg-[url('/assets/register/back.png')] w-[100%] h-[100vh] bg-no-repeat">
+      <ToastContainer />
       <div className=" w-full flex-wrap flex flex-row justify-end h-full">
         <div className="flex-[3]"></div>
         <div className="flex flex-[2] flex-col justify-between self-center px-[10vw] min-w-[400px]">
@@ -72,7 +86,7 @@ const Page: React.FC = () => {
             </div>
           </div>
           <div className="flex w-full flex-col gap-10 pt-5">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={onSubmitHandler}>
               {step === 0 ? (
                 <Step1 control={control} />
               ) : step === 1 ? (
@@ -126,7 +140,7 @@ const Page: React.FC = () => {
           </div>
           <div className="pt-5">
             If you already have an account,
-            <Link href={"#"} className=" text-[#5B56EF] underline">
+            <Link href={"/login"} className=" text-[#5B56EF] underline">
               Login
             </Link>
           </div>

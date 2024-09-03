@@ -26,6 +26,8 @@
     "react-multi-select-component": "^4.3.4",
     "react-paginate": "^8.2.0",
     "react-pagination": "^1.0.0",
+    "react-select": "^5.8.0",
+    "react-toastify": "^10.0.5",
     "styled-components": "^6.1.12",
     "yup": "^1.4.0"
   },

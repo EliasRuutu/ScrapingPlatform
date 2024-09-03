@@ -4,7 +4,7 @@ import RedHeart from "./assets/red-heart.svg"
 interface FavouriteOpportunityPropsType {
   pic: string | StaticImageData;
   amount: number;
-  discription:string;
+  description:string;
   name: string;
   from: string;
   to: string;
@@ -16,7 +16,7 @@ const FavouriteOpportunityCard: React.FC<FavouriteOpportunityPropsType> = ({
   from = Date.now,
   to,
   pic,
-  discription,
+  description,
   onClick
 }) => {
   return <>
@@ -35,7 +35,7 @@ const FavouriteOpportunityCard: React.FC<FavouriteOpportunityPropsType> = ({
             {name}
         </div>
         <div className=" text-[#454545]">
-            {discription}
+            {description}
         </div>
         <div className=" flex flex-row flex-wrap  gap-3 items-center">
             <div className=" rounded-full px-2 bg-[#E8E8FE] text-[#5B56EF]">
