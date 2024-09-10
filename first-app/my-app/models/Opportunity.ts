@@ -18,7 +18,7 @@ const OpportunitySchema = new Schema<OpportunityDocument>(
     },
     provider: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "users",
+      ref: "user",
       required: [true, "Provider is required!"],
     },
     amount: {

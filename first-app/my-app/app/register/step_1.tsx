@@ -11,7 +11,7 @@ const Step1: React.FC<Step1PropsType> = ({ control }) => {
         <Controller
           name="gender"
           control={control}
-          defaultValue=""
+          defaultValue="male"
           render={({
             field: { onChange, value },
             formState: { errors },

@@ -8,7 +8,11 @@ import facebook from "@/public/assets/icons/facebook.svg";
 import twitter from "@/public/assets/icons/twitter.svg";
 import medium from "@/public/assets/icons/medium.svg";
 import linkedin from "@/public/assets/icons/linkedin.svg";
+let icons = {"Facebook" : facebook, "Twitter":twitter, "Medium": medium, "LinkedIn" : linkedin, "WhatsApp" :medium, "Copiar para área de transferência" : medium }
+import Data from "@/db/data.json";
+import { useParams } from "next/navigation";
 const Page: React.FC = () => {
+  const { id } = useParams();
   return (
     <>
       <div className="flex flex-col gap-[105px]">
@@ -22,7 +26,7 @@ const Page: React.FC = () => {
           />
         </div>
         <div className=" flex flex-row flex-wrap gap-5">
-          <div className="flex-[3] flex flex-col gap-5">
+          <div className="flex-[3] flex flex-col gap-10">
             <div className="flex flex-row flex-wrap rounded-lg border-[#5B56EF] border-[1px] py-[30px] h-fit">
               <div className="flex-[3] flex flex-col gap-[7px] px-5 border-r-[1px] border-r-[#454545]">
                 <div className="text-[24px] text-[#5B56EF]">
@@ -30,7 +34,7 @@ const Page: React.FC = () => {
                 </div>
                 <div className=" pl-5 flex flex-col gap-[7px]">
                   <div className="text-[32px]">
-                    20/08/2024 18:00 to 29/08/2024 06:00
+                    {Data[id]["published"]} to{Data[id]["updated"]}
                   </div>
                   <div className="text-[16px] opacity-40">
                     GMT+10 (AM Vladivostok Standard Time)
@@ -45,15 +49,11 @@ const Page: React.FC = () => {
             </div>
             <div className="flex flex-col gap-5">
               <div className=" border-b-[1px]">
-                <div className=" border-b-4 border-b-[#5B56EF] w-fit px-5 text-[16px]">
+                <div className=" border-b-4 border-b-[#5B56EF] w-fit px-5 text-[16px] pb-[10px]">
                   Description
                 </div>
               </div>
-              <div className="text-[16px]">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui est
-                neque totam perferendis quos eaque nesciunt assumenda impedit
-                non quidem omnis, ad, cupiditate maiores ipsam culpa sequi a
-                modi mollitia.
+              <div className="text-[16px]" dangerouslySetInnerHTML={{__html:Data[id]["info"]}}>
               </div>
             </div>
           </div>
@@ -90,12 +90,14 @@ const Page: React.FC = () => {
             </div>
             <div className="flex flex-row justify-center">
               <Contacts
-                items={[
-                  { icon: facebook, path: "" },
-                  { icon: twitter, path: "" },
-                  { icon: linkedin, path: "" },
-                  { icon: medium, path: "" },
-                ]}
+                items={
+                  Data[id]?.social_links.map((item) => {
+                    return {
+                      icon: (item.title as String).toLowerCase(),
+                      path: item.href,
+                    };
+                  })
+                }
               />
             </div>
           </div>

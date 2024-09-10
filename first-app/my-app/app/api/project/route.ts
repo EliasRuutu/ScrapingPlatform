@@ -3,22 +3,29 @@ import { ObjectId } from "mongoose";
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 import Project, { ProjecDocument } from "@/models/Project";
-interface User {
+interface UserTempType {
   _id: ObjectId;
   name: string;
   email: string;
 }
 export const GET = async (req: NextRequest) => {
   await connectDB();
-  const projects = await Project.find();
-  return NextResponse.json({ data: projects });
+  try {
+    const projects = await Project.find({}).populate([
+      "provider",
+    ]);
+    return NextResponse.json({ data: projects });
+  } catch (e) {
+    console.log(e);
+    return NextResponse.json({ error: e });
+  }
 };
 export const POST = async (req: NextRequest) => {
   const data: ProjecDocument = await req.json();
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
   if (token) {
     const project = await Project.insertMany([
-      { ...data, provider: (token.user as User)._id },
+      { ...data, provider: (token.user as UserTempType)._id },
     ]);
     return NextResponse.json(project);
   }

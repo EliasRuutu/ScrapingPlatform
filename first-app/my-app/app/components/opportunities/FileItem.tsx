@@ -11,7 +11,7 @@ const FileItem: React.FC<FileItemPropsType> = ({ filename }) => {
   return (
     <div className=" flex flex-row gap-6">
       <Image
-        src={`/assets/filetypesIcons/${fileType}.svg`}
+        src={`/assets/filetypesIcons/${fileType}.png`}
         width={40}
         height={40}
         className=""

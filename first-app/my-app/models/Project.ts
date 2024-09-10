@@ -1,12 +1,13 @@
 import mongoose, { model, Schema, ObjectId } from "mongoose";
-export interface ProjecDocument {
-  _id?: ObjectId;
+import { UserDocument } from "./User";
+export interface ProjecDocument extends Document {
+  _id?: string;
   title: string;
   description: string;
   information: string;
-  files?: Array<{ filename: String; tempname: String }>;
-  opportunity: ObjectId;
-  provider: ObjectId;
+  files?: Array<{ origin: String; new: String }>;
+  opportunity: ObjectId|string;
+  provider: UserDocument["_id"]|string;
   status?: string;
   createdAt?: Date;
   updatedAt?: Date;
@@ -35,7 +36,7 @@ const ProjectSchema = new Schema<ProjecDocument>(
     },
     provider: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "users",
+      ref: "user",
       required: [true, "Provider is required!"],
     },
     status: {

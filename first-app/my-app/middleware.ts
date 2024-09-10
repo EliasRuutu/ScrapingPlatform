@@ -12,7 +12,6 @@ export async function middleware(req: NextRequest) {
     } else return NextResponse.redirect(new URL("/", req.url));
     // Allow access to these routes
   }
-
   if (!token) {
     return NextResponse.redirect(new URL("/login", req.url));
   }

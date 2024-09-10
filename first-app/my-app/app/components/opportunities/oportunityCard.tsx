@@ -8,13 +8,14 @@ interface OpportunityPropsType {
   name: string;
   from: string;
   to: string;
+  info?:Array<any>;
   isFavoriate: boolean;
   onClick?:(e:React.MouseEvent<HTMLDivElement>) => void
 }
 const OpportunityCard: React.FC<OpportunityPropsType> = ({
   amount,
   name,
-  from = Date.now,
+  from,
   to,
   isFavoriate,
   pic,
@@ -41,7 +42,7 @@ const OpportunityCard: React.FC<OpportunityPropsType> = ({
         </div>
         <div className=" flex flex-row flex-wrap justify-between gap-3 items-center">
             <div className=" rounded-full px-2 bg-[#E8E8FE] text-[#5B56EF]">
-                Open until <span className="text-[16px]">20 : 00, Tomorrow</span>
+              Published: <span className="text-[16px]">{from}</span>  Updated: <span className="text-[16px]">{to}</span>
             </div>
             <Image src={!isFavoriate ? BlackHeart : RedHeart} className="animate-pulse hover:animate-none cursor-pointer" alt=""/>
         </div>

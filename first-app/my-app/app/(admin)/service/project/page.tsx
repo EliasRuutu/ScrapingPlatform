@@ -2,8 +2,9 @@
 
 import dynamic from "next/dynamic";
 import SubHeadder from "@/app/components/admin/project/SubHeader";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { GetAll } from "@/actions/project";
 const DataTable = dynamic(() => import("react-data-table-component"), {
   ssr: false,
 });
@@ -213,6 +214,11 @@ const Page: React.FC = () => {
   ];
   const navigator = useRouter();
   const [isEdit, setIsEdit] = useState<boolean>(false);
+  useEffect(() => {
+    GetAll().then(res =>{
+      console.log(res.data);
+    });
+  }, []);
   return (
     <div>
       <DataTable
