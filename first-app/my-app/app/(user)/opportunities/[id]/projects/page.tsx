@@ -1,7 +1,7 @@
 "use client"
 import Layout from "@/app/components/Layout";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import FabButton from "@/app/components/FabButton";
 import deleteIcon from "@/public/assets/icons/delete.svg";
@@ -12,6 +12,7 @@ import previousIcon from "@/public/assets/icons/previous.svg"
 import { usePathname, useRouter } from "next/navigation";
 import Input from "@/app/components/Input";
 import Button from "@/app/components/Button";
+import { GetAll } from "@/actions/project";
 const Page: React.FC = () => {
   const navigator = useRouter();
   const itemsPerPage = 5;
@@ -28,6 +29,13 @@ const Page: React.FC = () => {
   const handleRouter = (id: string)=>{
     navigator.push(path+"/"+id);
   }
+  useEffect(() => {
+    const fechData = async () => {
+      let data = await GetAll();
+      console.log(data);
+    }
+    fechData();
+  }, [])
   return (
     <>
       <div className="flex flex-row justify-between ">

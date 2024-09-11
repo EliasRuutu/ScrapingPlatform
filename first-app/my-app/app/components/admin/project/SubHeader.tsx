@@ -14,9 +14,9 @@ const SubHeadder: React.FC<SubHeadderPropsType> = ({
   onClickAdd,
 }) => {
   const options = [
-    { label: "Grapes 🍇", value: "grapes" },
-    { label: "Mango 🥭", value: "mango" },
-    { label: "Strawberry 🍓", value: "strawberry", disabled: true },
+    { label: "Grapes", value: "grapes" },
+    { label: "Mango", value: "mango" },
+    { label: "Strawberry", value: "strawberry", disabled: true },
   ];
   const [selected, setSelected] = React.useState<
     Array<{ label: string; value: string; disable: boolean }>

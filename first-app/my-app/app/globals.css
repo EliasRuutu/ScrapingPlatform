@@ -56,7 +56,9 @@ select {
 .page-item {
   margin: 0 5px;
 }
-
+p{
+  text-indent: 1vi;
+}
 .page-link {
   padding: 8px 12px;
   border: 1px solid #0070f3;

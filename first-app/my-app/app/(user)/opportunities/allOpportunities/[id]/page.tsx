@@ -8,7 +8,14 @@ import facebook from "@/public/assets/icons/facebook.svg";
 import twitter from "@/public/assets/icons/twitter.svg";
 import medium from "@/public/assets/icons/medium.svg";
 import linkedin from "@/public/assets/icons/linkedin.svg";
-let icons = {"Facebook" : facebook, "Twitter":twitter, "Medium": medium, "LinkedIn" : linkedin, "WhatsApp" :medium, "Copiar para área de transferência" : medium }
+let icons = {
+  Facebook: facebook,
+  Twitter: twitter,
+  Medium: medium,
+  LinkedIn: linkedin,
+  WhatsApp: medium,
+  "Copiar para área de transferência": medium,
+};
 import Data from "@/db/data.json";
 import { useParams } from "next/navigation";
 const Page: React.FC = () => {
@@ -33,19 +40,20 @@ const Page: React.FC = () => {
                   Application opens on:
                 </div>
                 <div className=" pl-5 flex flex-col gap-[7px]">
-                  <div className="text-[32px]">
-                    {Data[id]["published"]} to{Data[id]["updated"]}
+                  <div className="text-[20px]">
+                    Published: {Data[id]["published"]} Updated:{" "}
+                    {Data[id]["updated"]}
                   </div>
                   <div className="text-[16px] opacity-40">
                     GMT+10 (AM Vladivostok Standard Time)
                   </div>
                 </div>
               </div>
-              <div className=" flex-1 flex flex-row align-middle items-center justify-center px-10">
+              {/* <div className=" flex-1 flex flex-row align-middle items-center justify-center px-10">
                 <Button variant="fill" color="#5B56EF" onClick={() => {}}>
                   Access
                 </Button>
-              </div>
+              </div> */}
             </div>
             <div className="flex flex-col gap-5">
               <div className=" border-b-[1px]">
@@ -53,8 +61,10 @@ const Page: React.FC = () => {
                   Description
                 </div>
               </div>
-              <div className="text-[16px]" dangerouslySetInnerHTML={{__html:Data[id]["info"]}}>
-              </div>
+              <div
+                className="text-[16px]"
+                dangerouslySetInnerHTML={{ __html: Data[id]["info"] }}
+              ></div>
             </div>
           </div>
           <div className="flex-1 flex flex-col gap-10">
@@ -79,10 +89,10 @@ const Page: React.FC = () => {
               <div className="text-[24px]">Additional Files</div>
               <hr></hr>
               <div className="flex flex-col gap-[30px]">
-                {[1, 2, 3, 4, 5].map((item, index) => {
+                {Data[id]["support_files"].map((item: any, index: number) => {
                   return (
                     <div key={index}>
-                      <FileItem filename="Document.pdf" />
+                      <FileItem filename={item.filename + "." + item.type} />
                     </div>
                   );
                 })}
@@ -90,14 +100,14 @@ const Page: React.FC = () => {
             </div>
             <div className="flex flex-row justify-center">
               <Contacts
-                items={
-                  Data[id]?.social_links.map((item) => {
+                items={Data[id]?.social_links.map(
+                  (item: { title: string; href: string }) => {
                     return {
                       icon: (item.title as String).toLowerCase(),
                       path: item.href,
                     };
-                  })
-                }
+                  }
+                )}
               />
             </div>
           </div>

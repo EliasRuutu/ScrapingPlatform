@@ -38,7 +38,7 @@ const Page: React.FC = () => {
       let aa =
         data &&
         data.map((item: any) => {
-          return { value: item._id, label: item.name };
+          return { value: item._id, label: item.title };
         });
       setOptions(aa);
     });

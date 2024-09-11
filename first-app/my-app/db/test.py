@@ -40,6 +40,10 @@ for sub_url in sub_urls:
     for social_link in social_links:
         opportunity["social_links"].append({"title": social_link["title"], "href": social_link["href"]})
     opportunity['info']=opportunity['info'] = ' '.join(str(child) for child in soup.find(id='content').find(id="parent-fieldname-text").children)
+    opportunity["support_files"]=[]
+    support_files = soup.find(id='content').find(id="parent-fieldname-text").find_all(class_="internal-link")
+    for support_file in support_files:
+        opportunity["support_files"].append({"url":support_file["href"], "filename":support_file.text, "type": "pdf" if support_file["data-tippreview-enabled"] == "true" else "docx"})
     # opportunity['info']=[]
     # info_supports_soup = soup.find(id='content').find(id="parent-fieldname-text").find_all('strong')
     # info_supports_soup.pop(0)

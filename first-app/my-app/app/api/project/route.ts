@@ -11,9 +11,7 @@ interface UserTempType {
 export const GET = async (req: NextRequest) => {
   await connectDB();
   try {
-    const projects = await Project.find({}).populate([
-      "provider",
-    ]);
+    const projects = await Project.find({}).populate(["provider"]);
     return NextResponse.json({ data: projects });
   } catch (e) {
     console.log(e);

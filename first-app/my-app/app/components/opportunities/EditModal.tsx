@@ -7,21 +7,14 @@ import Select from "@/app/components/Select";
 import moment from "moment";
 import { useRef } from "react";
 import { Update } from "@/actions/opportunity";
+import { OpportunityDocument } from "@/models/Opportunity";
 Modal.setAppElement("#app");
 interface EditModalPropsType {
   isShow: boolean;
-  data: OpportunityEditFormType;
+  data: OpportunityDocument;
   closeModal: () => void;
 }
 ///
-export interface OpportunityEditFormType {
-  name: string;
-  type: string;
-  amount: number;
-  from: string;
-  to: string;
-  _id:string
-}
 const customStyles = {
   content: {
     top: "30%",
@@ -37,7 +30,7 @@ const EditModal: React.FC<EditModalPropsType> = ({
   data,
   closeModal,
 }) => {
-  const { handleSubmit, control } = useForm<OpportunityEditFormType>();
+  const { handleSubmit, control } = useForm<OpportunityDocument>();
   const formRef = useRef(null);
   const onSubmit = async (formData: any) => {
     const result = await Update(data._id, formData);

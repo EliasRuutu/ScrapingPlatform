@@ -1,28 +1,13 @@
 "use client";
-import moment from "moment";
 import dynamic from "next/dynamic";
 import SubHeadder from "@/app/components/admin/opportunity/SubHeader";
 import { useEffect, useState } from "react";
 import { GetAll } from "@/actions/opportunity";
 import { ObjectId } from "mongoose";
-import EditModal, {
-  OpportunityEditFormType,
-} from "@/app/components/opportunities/EditModal";
-import AddModal from "@/app/components/opportunities/AddModal";
+import { OpportunityDocument } from "@/models/Opportunity";
 const DataTable = dynamic(() => import("react-data-table-component"), {
   ssr: false,
 });
-interface DataType {
-  _id: ObjectId;
-  name: string;
-  type?: string;
-  provider: string;
-  from: Date;
-  to: Date;
-  created: Date;
-  status: string;
-  amount: number;
-}
 const Page: React.FC = () => {
   const columns = [
     {
@@ -30,33 +15,18 @@ const Page: React.FC = () => {
       selector: (row: any) => row._id,
     },
     {
-      name: "Name",
-      selector: (row: any) => row.name,
+      name: "Title",
+      selector: (row: any) => row.title,
       sortable: true,
     },
     {
-      name: "Provider",
-      selector: (row: any) => row.provider,
+      name: "Published",
+      selector: (row: any) => row.published,
       sortable: true,
     },
     {
-      name: "Amount",
-      selector: (row: any) => "$" + row.amount,
-      sortable: true,
-    },
-    {
-      name: "From",
-      selector: (row: any) => moment(row.from).format("DD/MM/YYYY"),
-      sortable: true,
-    },
-    {
-      name: "To",
-      selector: (row: any) => moment(row.to).format("DD/MM/YYYY"),
-      sortable: true,
-    },
-    {
-      name: "Created",
-      selector: (row: any) => moment(row.created).format("DD/MM/YYYY"),
+      name: "Updated",
+      selector: (row: any) => row.updated,
       sortable: true,
     },
     {
@@ -65,17 +35,17 @@ const Page: React.FC = () => {
       sortable: true,
     },
   ];
-  const [opportunities, setOpportunities] = useState<DataType[]>([]);
+  const [opportunities, setOpportunities] = useState<OpportunityDocument[]>([]);
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [isEditModal, setIsEditModal] = useState<boolean>(false);
-  const [isAddModal, setIsAddModal] = useState<boolean>(false);
-  const [selectedRow, setSelectedRow] = useState<OpportunityEditFormType>({
-    name: "",
-    type: "",
-    from: "",
-    to:"",
-    amount: 0,
-    _id:""
+  const [selectedRow, setSelectedRow] = useState<OpportunityDocument>({
+    title: "",
+    published: "",
+    updated: "",
+    info:"",
+    socialLinks: [],
+    _id:"",
+    status:"visible",
+    favourite:false
   });
   useEffect(() => {
     const fetchData = async () => {
@@ -84,15 +54,9 @@ const Page: React.FC = () => {
     };
     fetchData();
   }, []);
-  const openEditModal = () => {
-    setIsEditModal(true);
-  };
-  const openAddModal = () => {
-    setIsAddModal(true);
-  };
   return (
     <div id="app">
-      {selectedRow && (
+      {/* {selectedRow && (
         <EditModal
           isShow={isEditModal}
           data={selectedRow}
@@ -100,13 +64,13 @@ const Page: React.FC = () => {
             setIsEditModal(false);
           }}
         />
-      )}
-      <AddModal
+      )} */}
+      {/* <AddModal
         isShow={isAddModal}
         closeModal={() => {
           setIsAddModal(false);
         }}
-      />
+      /> */}
       <DataTable
         columns={columns}
         data={opportunities}
@@ -114,7 +78,7 @@ const Page: React.FC = () => {
         selectableRows
         selectableRowsSingle
         onSelectedRowsChange={(e) => {
-          setSelectedRow(e.selectedRows[0] as OpportunityEditFormType);
+          setSelectedRow(e.selectedRows[0] as OpportunityDocument);
           setIsEdit(e.selectedCount === 1);
         }}
         // actions={<button>Add</button>}
@@ -123,8 +87,6 @@ const Page: React.FC = () => {
         subHeader
         subHeaderComponent={
           <SubHeadder
-            onClickEdit={openEditModal}
-            onClickAdd={openAddModal}
             isEdit={isEdit}
           />
         }

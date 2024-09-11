@@ -1,16 +1,25 @@
 import UnderlineInput from "../../UnderlineInput";
 import Image from "next/image";
 import Button from "../../Button";
+import Data from "@/db/data.json"
+import axios from "axios";
 interface SubHeadderPropsType {
   isEdit?: boolean;
-  onClickEdit: () => void;
-  onClickAdd: () => void;
+  onClickEdit?: () => void;
+  onClickAdd?: () => void;
 }
 const SubHeadder: React.FC<SubHeadderPropsType> = ({
   isEdit,
   onClickEdit,
   onClickAdd,
 }) => {
+  const handleFromJson = () => {
+    axios.get("/api/scrap").then(res => {
+      console.log(res);
+    }).catch(error => {
+      console.log(error)
+    })
+  }
   return (
     <div className="w-full flex flex-row justify-between">
       <div className="flex flex-row gap-5">
@@ -39,12 +48,12 @@ const SubHeadder: React.FC<SubHeadderPropsType> = ({
         </Button>
       </div>
       <div className="flex flex-row justify-end gap-5">
-        {isEdit && (
+        {/* {isEdit && (
           <>
             <Button
               variant="outline"
               color="#5B56EF"
-              onClick={onClickEdit}
+              onClick={onClickEdit??}
               width="w-[150px]"
             >
               Edit
@@ -66,6 +75,14 @@ const SubHeadder: React.FC<SubHeadderPropsType> = ({
           width="w-[150px]"
         >
           +Add
+        </Button> */}
+        <Button
+          variant="fill"
+          color="#5B56EF"
+          onClick={handleFromJson}
+          width="w-[150px]"
+        >
+          From Scrapping
         </Button>
       </div>
     </div>

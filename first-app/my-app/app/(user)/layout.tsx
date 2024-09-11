@@ -27,7 +27,7 @@ export default function Layout({
             lable: "Opportunities of interest",
             url: "/opportunities/favouriteOpportunities",
           },
-          { lable: "My opportunities", url: "/opportunities/myOpportunities" },
+          // { lable: "My opportunities", url: "/opportunities/myOpportunities" },
         ]}
       />
       {children}

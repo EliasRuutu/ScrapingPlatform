@@ -14,7 +14,7 @@ const FileItem: React.FC<FileItemPropsType> = ({ filename }) => {
         src={`/assets/filetypesIcons/${fileType}.png`}
         width={40}
         height={40}
-        className=""
+        className=" h-fit"
         alt=""
       />
       <div className=" flex flex-col justify-center text-left">

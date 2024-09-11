@@ -30,10 +30,10 @@ const Layout: React.FC<LayoutPropsType> = ({
                 lable: "Opportunities of interest",
                 url: "/opportunities/favouriteOpportunities",
               },
-              {
-                lable: "My opportunities",
-                url: "/opportunities/myOpportunities",
-              },
+              // {
+              //   lable: "My opportunities",
+              //   url: "/opportunities/myOpportunities",
+              // },
             ]}
           />
         )}

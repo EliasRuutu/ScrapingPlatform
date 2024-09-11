@@ -1,49 +1,47 @@
 import mongoose, { ObjectId, Schema, model } from "mongoose";
-interface OpportunityDocument {
+export interface OpportunityDocument {
+  favourite: boolean;
   _id: string;
-  name: string;
-  provider: ObjectId;
-  amount: number;
-  from: Date;
-  to: Date;
-  createdAt: Date;
-  updatedAt: Date;
-  status: string;
+  title: string;
+  published?: string;
+  updated?: string;
+  socialLinks?: Array<{
+    title: string;
+    href: string;
+  }>;
+  info: string;
+  supportFiles?:Array<{
+    url:string;
+    filename:string;
+    type:string;
+  }>;
+  status:string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 const OpportunitySchema = new Schema<OpportunityDocument>(
   {
-    name: {
+    title: {
       type: String,
       required: [true, "Opportunity'name is required!"],
     },
-    provider: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "user",
-      required: [true, "Provider is required!"],
-    },
-    amount: {
-      type: Number,
-      required: [true, "Amount is required!"],
-    },
-    from: {
-      type: Date,
-      required: [true, "From is required"],
-    },
-    to: {
-      type: Date,
-      required: [true, "To is required"],
-    },
-    status:{
+    published: {
       type: String,
-      enum: [
-        'pending',
-        'approved',
-        'rejected'
-      ],
-      default:"pending"
-    }
+      required: [true, "Published is required"],
+    },
+    updated: {
+      type: String,
+      required: [true, "Updated is required"],
+    },
+    status: {
+      type: String,
+      enum: ["visible", "hidden"],
+      default: "visible",
+    },
   },
   { timestamps: true }
 );
-const Opportunity = mongoose.models.Opportunity || model<OpportunityDocument>("Opportunity", OpportunitySchema)
+const Opportunity =
+  mongoose.models.Opportunity ||
+  model<OpportunityDocument>("Opportunity", OpportunitySchema);
 export default Opportunity;
